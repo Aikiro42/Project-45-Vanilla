@@ -82,10 +82,12 @@ function build(directory, config, parameters, level, seed)
   }
   for _, parameter in ipairs({
     "cycleTime",
-    "baseDamage",
+    "baseDamageMultiplier",
     "reloadCost",
     "inaccuracy",
-    "maxAmmo"
+    "maxAmmo",
+    "critChance",
+    "critDamageMult"
   }) do
     config.primaryAbility[parameter] = rng:randf(config.primaryAbility[parameter][1], config.primaryAbility[parameter][2])
     if intParams[parameter] then
@@ -172,6 +174,8 @@ function build(directory, config, parameters, level, seed)
     end
   end
 
+  
+  config.tooltipKind = "project45gun"
   return unrandBuild(directory, config, parameters, level, seed)
 end
 
