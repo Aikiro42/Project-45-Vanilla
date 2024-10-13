@@ -1,0 +1,755 @@
+{
+  "globalTagDefaults" : {
+    "paletteSwaps" : "",
+    "chargeFrame": "1",
+    "directives": "",
+    "behind": ""
+  },
+
+  "animatedParts" : {
+    "stateTypes" : {
+
+
+      // compatibility
+      "firing" : {
+        "default" : "off",
+        "states" : {
+          "off" : {},
+          "charge" : {},
+          "fire" : {
+            "frames" : 2,
+            "cycle" : 0.07,
+            "mode" : "transition",
+            "transition" : "off"
+          }
+        }
+      },
+
+      "altfiring": {
+        "default" : "off",
+        "states" : {
+          "off" : {},
+          "charge" : {},
+          "fire" : {
+            "frames" : 2,
+            "cycle" : 0.07,
+            "mode" : "transition",
+            "transition" : "off"
+          }
+        }
+      },
+
+      /*
+      "erchiuseye" : {
+        "default" : "idle",
+        "states" : {
+          "idle" : {},
+          "squirm" : {},
+          "fire" : {}
+        }
+      },
+      */
+
+      "gun" : {
+        "default" : "idle",
+        "states" : {
+          "idle": {
+            "frames" : 1,
+            "cycle" : 0.25,
+            "mode" : "loop"
+          },
+
+          // for break action guns
+          // (This animation state can only be accessed if the <breakAction> config in the primaryAbility
+          // is true, and will work given you've configured the middle's frames to include a set
+          // of "open.<frame>" frames)
+          "open": {
+            "frames" : 1,
+            "cycle" : 0.25,
+            "mode" : "loop"
+          },
+
+          // firing -> idle
+          // (FORCED) firing -> ejecting
+          // (You can set the transition to "fired" in the weapon's custom animation config,
+          // given you've configured the frames to include a "fired.<frame>" set)
+          "firing": {
+            "frames" : 1,
+            "cycle" : 0.25,
+            "mode" : "transition",
+            "transition": "idle"
+          },
+          "fired": {
+            "frames" : 1,
+            "cycle" : 0.25,
+            "mode" : "loop"
+          },
+          "firingLoop": {
+            "frames" : 1,
+            "cycle" : 0.25,
+            "mode" : "loop"
+          },
+
+          // ejecting -> ejected
+          // (FORCED) ejected -> feeding
+          "ejecting": {
+            "frames" : 1,
+            "cycle" : 0.25,
+            "mode" : "transition",
+            "transition": "ejected"
+          },
+          "boltPulling": {
+            "frames" : 1,
+            "cycle" : 0.25,
+            "mode" : "transition",
+            "transition": "ejected"
+          },
+          "ejected": {
+            "frames" : 1,
+            "cycle" : 0.25,
+            "mode" : "loop"
+          },
+
+          // feeding -> idle
+          // (FORCED) feeding -> jammed
+          "feeding": {
+            "frames" : 1,
+            "cycle" : 0.25,
+            "mode" : "transition",
+            "transition": "idle"
+          },
+          "boltPushing": {
+            "frames" : 1,
+            "cycle" : 0.25,
+            "mode" : "transition",
+            "transition": "idle"
+          },
+
+          // unjamming -> jammed
+          // (FORCED) unjamming -> feeding
+          "jammed": {
+            "frames" : 1,
+            "cycle" : 0.25,
+            "mode" : "loop"
+          },
+          "unjamming": {
+            "frames" : 1,
+            "cycle" : 0.25,
+            "mode" : "transition",
+            "transition": "jammed"
+          }
+
+        }
+      },
+      
+      "flash" : {
+        "default": "off",
+        "states":{
+          "off" : {},
+          "flash" : {
+            "frames" : 2,
+            "cycle" : 0.07,
+            "mode" : "transition",
+            "transition" : "off"
+          }
+        }
+      },
+
+      "altflash" : {
+        "default": "off",
+        "states":{
+          "off" : {},
+          "flash" : {
+            "frames" : 2,
+            "cycle" : 0.07,
+            "mode" : "transition",
+            "transition" : "off"
+          }
+        }
+      },
+      
+      "charge": {
+        "default": "off",
+        "states": {
+          "off": {},
+          "chargingProg": {},
+          "charging": {
+            "frames" : 1,
+            "cycle" : 0.25,
+            "mode" : "transition",
+            "transition" : "off"
+          }
+        }
+      },
+      "chamber": {
+        "default": "ready",
+        "states": {
+          "empty": {},
+          "ready": {},
+          "filled": {}
+        }
+      },
+      "bolt": {
+        "default": "closed",
+        "states": {
+          "open": {},
+          "closed": {},
+          "jammed": {}
+        }
+      },
+      "magazine": {
+        "default": "present",
+        "states": {
+          "present": {},
+          "absent": {}
+        }
+      }
+    },
+
+    "parts" : {
+      "butt" : {
+        "properties" : {
+          "centered" : true,
+          "image" : "<partImage><paletteSwaps><directives>",
+          "offset" : [0, 0], // x offset is set dynamically
+          "transformationGroups" : ["weapon"]
+        }
+      },
+      "muzzle" : {
+        "properties" : {
+          "centered" : true,
+          "image" : "<partImage><paletteSwaps><directives>",
+          "offset" : [0, 0], // x offset is set dynamically
+          "transformationGroups" : ["weapon"]
+        }
+      },
+      "barrel" : {
+        "properties" : {
+          "centered" : true,
+          "image" : "<partImage><paletteSwaps><directives>",
+          "offset" : [0, 0], // x offset is set dynamically
+          "transformationGroups" : ["weapon"]
+        }
+      },
+      "middle": {
+        "properties":{
+          "zLevel" : 0,
+          "centered" : true,
+          "image" : "<partImage><paletteSwaps><directives>",
+          "offset" : [0, 0], // x offset is set dynamically
+          "transformationGroups" : ["weapon"]
+        },
+        
+        "partStates" : {
+          "gun" : {
+            "idle" : {
+              "properties" : {
+                "image" : "<partImage><paletteSwaps><directives>"
+              }
+            },
+            "open" : {
+              "properties" : {
+                "image" : "<partImage><paletteSwaps><directives>"
+              }
+            },
+            "firing" : {
+              "properties" : {
+                "image" : "<partImage><paletteSwaps><directives>"
+              }
+            },
+            "fired" : {
+              "properties" : {
+                "image" : "<partImage><paletteSwaps><directives>"
+              }
+            },
+            "firingLoop" : {
+              "properties" : {
+                "image" : "<partImage><paletteSwaps><directives>"
+              }
+            },
+            "ejecting" : {
+              "properties" : {
+                "image" : "<partImage><paletteSwaps><directives>"
+              }
+            },
+            "boltPulling" : {
+              "properties" : {
+                "image" : "<partImage><paletteSwaps><directives>"
+              }
+            },
+            "ejected" : {
+              "properties" : {
+                "image" : "<partImage><paletteSwaps><directives>"
+              }
+            },
+            "feeding" : {
+              "properties" : {
+                "image" : "<partImage><paletteSwaps><directives>"
+              }
+            },
+            "boltPushing" : {
+              "properties" : {
+                "image" : "<partImage><paletteSwaps><directives>"
+              }
+            },
+            "jammed" : {
+              "properties" : {
+                "image" : "<partImage><paletteSwaps><directives>"
+              }
+            },
+            "unjamming" : {
+              "properties" : {
+                "image" : "<partImage><paletteSwaps><directives>"
+              }
+            }
+            
+          }
+        }
+      },
+      
+      "charge": {
+        "properties":{
+          "zLevel" : 1,
+          "centered" : true,
+          "image" : "<partImage><paletteSwaps><directives>",
+          "offset" : [0, 0], // x offset is set dynamically
+          "transformationGroups" : ["weapon"]
+        },
+        
+        "partStates" : {
+          "charge" : {
+            "off": {
+              "properties": {
+                "image": ""
+              }
+            },
+            "charging": {
+              "properties": {
+                "image" : "<partImage><paletteSwaps><directives>"
+              }
+            },
+            "chargingProg": {
+              "properties": {
+                "image" : "<partImage><paletteSwaps><directives>"
+              }
+            }
+          }
+        }
+      },
+      "chargeFullbright": {
+        "properties":{
+          "zLevel": 3,
+          "centered" : true,
+          "image" : "<partImage><paletteSwaps><directives>",
+          "offset" : [0, 0], // x offset is set dynamically
+          "transformationGroups" : ["weapon"],
+          "fullbright" : true
+        },
+        
+        "partStates" : {
+          "charge" : {
+            "off": {
+              "properties": {
+                "image": ""
+              }
+            },
+            "charging": {
+              "properties": {
+                "image" : "<partImage><paletteSwaps><directives>"
+              }
+            },
+            "chargingProg": {
+              "properties": {
+                "image" : "<partImage><paletteSwaps><directives>"
+              }
+            }
+          }
+        }
+      },
+
+      "middleFullbright": {
+        "properties":{
+          "zLevel" : 2,
+          "centered" : true,
+          "image" : "<partImage><paletteSwaps><directives>",
+          "offset" : [0, 0], // x offset is set dynamically
+          "transformationGroups" : ["weapon"],
+          "fullbright" : true
+        },
+        
+        "partStates" : {
+          "gun" : {
+            "idle" : {
+              "properties" : {
+                "image" : "<partImage><paletteSwaps><directives>"
+              }
+            },
+            "open" : {
+              "properties" : {
+                "image" : "<partImage><paletteSwaps><directives>"
+              }
+            },
+            "firing" : {
+              "properties" : {
+                "image" : "<partImage><paletteSwaps><directives>"
+              }
+            },
+            "fired" : {
+              "properties" : {
+                "image" : "<partImage><paletteSwaps><directives>"
+              }
+            },
+            "firingLoop" : {
+              "properties" : {
+                "image" : "<partImage><paletteSwaps><directives>"
+              }
+            },
+            "ejecting" : {
+              "properties" : {
+                "image" : "<partImage><paletteSwaps><directives>"
+              }
+            },
+            "boltPulling" : {
+              "properties" : {
+                "image" : "<partImage><paletteSwaps><directives>"
+              }
+            },
+            "ejected" : {
+              "properties" : {
+                "image" : "<partImage><paletteSwaps><directives>"
+              }
+            },
+            "feeding" : {
+              "properties" : {
+                "image" : "<partImage><paletteSwaps><directives>"
+              }
+            },
+            "boltPushing" : {
+              "properties" : {
+                "image" : "<partImage><paletteSwaps><directives>"
+              }
+            },
+            "jammed" : {
+              "properties" : {
+                "image" : "<partImage><paletteSwaps><directives>"
+              }
+            },
+            "unjamming" : {
+              "properties" : {
+                "image" : "<partImage><paletteSwaps><directives>"
+              }
+            }
+            
+          }
+        }
+      },
+
+      "muzzleFlash" : {
+        "properties" : {
+          "zLevel" : 1,
+          "centered" : true,
+          "offset" : [0.75, 0],
+          "fullbright" : true,
+          "transformationGroups" : ["muzzle"]
+        },
+
+        "partStates" : {
+          "flash" : {
+            "flash" : {
+              "properties" : {
+                "image" : "<partImage>:<variant>.<frame><directives>"
+              }
+            }
+          },
+          "firing" : {
+            "fire" : {
+              "properties" : {
+                "image" : "<partImage>:<variant>.<frame><directives>"
+              }
+            }
+          }
+        }
+      },
+
+      "altMuzzleFlash" : {
+        "properties" : {
+          "zLevel" : 1,
+          "centered" : true,
+          "offset" : [0, 0],
+          "fullbright" : true,
+          "transformationGroups" : ["altmuzzle"]
+        },
+
+        "partStates" : {
+          "altflash" : {
+            "flash" : {
+              "properties" : {
+                "image" : "<partImage>:<variant>.<frame><directives>"
+              }
+            }
+          },
+          "altfiring" : {
+            "fire" : {
+              "properties" : {
+                "image" : "<partImage>:<variant>.<frame><directives>"
+              }
+            }
+          }
+        }
+      },
+      "magazine": {
+        "properties":{
+          "zLevel": 0,
+          "centered" : true,
+          "image" : "<partImage>:present.<ammo><behind>",
+          "offset" : [0, 0], // x offset is set dynamically
+          "transformationGroups" : ["weapon"]
+        },
+        "partStates" : {
+          "magazine": {
+            "present": {
+              "properties" : {
+                "image" : "<partImage><paletteSwaps><directives>"
+              }
+            },
+            "absent":{
+              "properties" : {
+                "image" : ""
+              }
+            }
+          }
+        }
+      },
+      "magazineFullbright": {
+        "properties":{
+          "zLevel": 1,
+          "centered" : true,
+          "image" : "<partImage><paletteSwaps><directives>",
+          "offset" : [0, 0], // x offset is set dynamically
+          "transformationGroups" : ["weapon"],
+          "fullbright": true
+        },
+        "partStates" : {
+          "magazine": {
+            "present": {
+              "properties" : {
+                "image" : "<partImage><paletteSwaps><directives>"
+              }
+            },
+            "absent":{
+              "properties" : {
+                "image" : ""
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "rotationGroups" : {
+    "weapon" : {
+      "angularVelocity" : 0
+    }
+  },
+
+  "transformationGroups" : {
+    "weapon" : {},
+    "muzzle" : {},
+    "altmuzzle" : {},
+    "ejectionPort": {},
+    "magazine": {},
+    "beamEnd": {}
+  },
+
+  "particleEmitters" : {
+    "shootSmoke": {
+      "transformationGroups" : ["muzzle"],
+      "offsetRegion" : [0, 0, 0, 0],
+      "emissionRate" : 1,
+      "particles" : [
+        {"particle": "project45shootsmoke1"},
+        {"particle": "project45shootsmoke2"},
+        {"particle": "project45shootsmoke3"}
+      ]
+    },
+    "muzzleFlash" : {
+      "transformationGroups" : ["muzzle"],
+      "offsetRegion" : [0, 0, 0, 0],
+      "emissionRate" : 100,
+      "particles" : [ 
+        {"particle": "project45muzzle"},
+        {"particle": "project45muzzle"},
+        {"particle": "project45muzzle"},
+        {"particle": "project45flashbang-yellow"}
+      ]
+    },
+    "altMuzzleFlash" : {
+      "transformationGroups" : ["muzzle"],
+      "offsetRegion" : [0, 0, 0, 0],
+      "emissionRate" : 100,
+      "particles" : [ 
+        {"particle": "project45muzzle"},
+        {"particle": "project45muzzle"},
+        {"particle": "project45muzzle"},
+        {"particle": "project45flashbang-yellow"}
+      ]
+    },
+    "muzzleCrit" : {
+      "transformationGroups" : ["muzzle"],
+      "offsetRegion" : [0, 0, 0, 0],
+      "emissionRate" : 100,
+      "particles" : [ 
+        {"particle": "project45muzzlecrit"},
+        {"particle": "project45muzzlecrit"},
+        {"particle": "project45muzzlecrit"},
+        {"particle": "project45muzzlecrit"},
+        {"particle": "project45muzzlecrit"},
+        {"particle": "project45muzzlecrit"}
+      ]
+    },
+    "muzzleSmoke" : {
+      "transformationGroups" : ["muzzle"],
+      "offsetRegion" : [0, 0, 0, 0],
+      "emissionRate" : 256,
+      "particles" : [ 
+        {"particle": "project45muzzlesmoke"}
+      ]
+    },
+
+    "chargeSmoke" : {
+      "transformationGroups" : ["weapon"],
+      "offsetRegion" : [0, 0, 0, 0],
+      "emissionRate" : 10,
+      "particles" : [ 
+        {"particle": "rocketbarrelpuff"}
+      ]
+    },
+
+    "magazine" : {
+      "transformationGroups" : ["magazine"],
+      "offsetRegion" : [0, 0, 0, 0],
+      "emissionRate" : 1,
+      "particles" : [ 
+        {"particle": "project45neocustommag"}
+      ]
+    },
+
+    "ejectionPort" : {
+      "transformationGroups" : ["ejectionPort"],
+      "offsetRegion" : [0, 0, 0, 0],
+      "emissionRate" : 1,
+      "particles" : []
+    },
+    "backEjectionPort" : {
+      "transformationGroups" : ["ejectionPort"],
+      "offsetRegion" : [0, 0, 0, 0],
+      "emissionRate" : 1,
+      "particles" : []
+    },
+
+    // compatibility
+    "beamCollision" : {
+      "transformationGroups" : ["muzzle", "beamEnd"],
+      "offsetRegion" : [0, 0, 0, 0],
+      "emissionRate" : 0,
+      "particles" : [ ]
+    }
+
+  },
+
+  "lights" : {
+    "muzzleFlash" : {
+      "active" : false,
+      "position" : [0, 0],
+      "color" : [0, 0, 0],
+      "pointLight": true,
+      "pointBeam": 0.3
+    },
+    "altMuzzleFlash" : {
+      "active" : false,
+      "position" : [0, 0],
+      "color" : [0, 0, 0],
+      "pointLight": true,
+      "pointBeam": 0.3
+    }
+  },
+
+  "sounds" : {
+
+    // plays when the gun is equipped
+    "init": [],
+    
+    // plays every time the gun fires
+    "fire": ["/sfx/project45neosfx/fire/fire-pistol1.ogg"],
+    "perfectChargeFire": [],
+
+    // plays when the gun isn't jammed and cannot be fired.
+    "click": ["/sfx/project45neosfx/click/click-01.ogg"],
+
+    // plays when the gun jams
+    "jam": ["/sfx/project45neosfx/jam.ogg"],
+    
+    // plays when the gun is jammed and player attempts to fire, i.e. unjamming
+    "unjam": ["/sfx/project45neosfx/click/click-02.ogg"],
+
+    // plays every time the gun is shot; increases in volume the lower the ammo count
+    "hollow": ["/sfx/project45neosfx/hollow/hollow-01.ogg"],
+
+    // plays when attempting to fire while ammo count is 0
+    "ejectMag": ["/sfx/project45neosfx/ejectmag/ejectmag-medium1.ogg"],
+
+    "ejectCasing": [ ], // plays every time casing(s) is/are ejected
+
+    // plays when reload minigame is started (i.e. attempt to fire while there is no magazine)
+    // usually sounds like someone retrieving a magazine (getmag)
+    "reloadStart": ["/sfx/project45neosfx/getmag/getmag-generic1.ogg"],
+    
+    // plays during duration of reload
+    "reloadLoop": [],
+    
+    // plays when reload minigame resets i.e. fraction of max ammo is loaded
+    "loadRound": ["/sfx/project45neosfx/loadround/loadround-rifle1.ogg"],
+    
+    // plays when reload game ends
+    // usually sounds like a magazine inserted (loadmag)
+    "reloadEnd": ["/sfx/project45neosfx/loadmag/loadmag-light1.ogg"],
+
+    // plays when there is an active reload and the red indicator is over the white zone
+    "badReload": [
+      "/sfx/project45neosfx/reloads/badreload1.ogg",
+      "/sfx/project45neosfx/reloads/badreload2.ogg"
+    ],
+
+    // plays when there is an active reload and the red indicator is over the purple zone
+    "goodReload": ["/sfx/project45neosfx/reloads/goodreload1.ogg"],
+
+    // plays when there is an active reload and the red indicator is over the pink zone
+    "perfectReload": ["/sfx/project45neosfx/reloads/perfectreload1.ogg"],
+
+    // plays when the gun ejects; may not play all the time depending on gun's current state
+    // may be audible while gun is cocking regardless of whether it's manual-fed or not
+    "boltPull": ["/sfx/project45neosfx/boltpull/boltpull-generic1.ogg"],
+
+    // plays when the gun feeds; may not play all the time depending on gun's current state
+    // audible while gun is cocking regardless of whether it's manual-fed or not
+    "boltPush": ["/sfx/project45neosfx/boltpush/boltpush-generic1.ogg"],
+    
+    // plays once when charging starts;
+    "chargeStart": [ ],
+    // plays while charging; increases in pitch the closer the charge is to 100%
+    "chargeWhine": [ ],
+    // plays while charging; increases in volume the closer the charge is to 100%
+    "chargeDrone": [ ],
+    // plays once when charging ends;
+    "chargeEnd": [ ],
+    
+    // properties present for compatibility
+    "beamImpact": [],
+    "altFire": [ ],
+    "fireStart": [ ],
+    "fireLoop": [ ],
+    "fireEnd": [ ]
+    
+  }
+}

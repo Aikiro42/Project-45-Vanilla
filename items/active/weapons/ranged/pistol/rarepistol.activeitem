@@ -24,7 +24,9 @@
   "sightsOffset" : [0,0],
   "underbarrelOffset" : [0,0],
   "stockOffset" : [0, 0],
-
+  
+  "animation" : "/items/active/weapons/ranged/abilities/project45gunfire/project45gunfire-vanilla.animation",
+  
   "scripts" : ["/items/active/weapons/ranged/project45gunneo.lua"],
   "primaryAbilityType": "project45gunfire",
   "primaryAbility": {
@@ -78,7 +80,13 @@
         "variants" : 20,
         "paletteSwap" : true
       },
-      "muzzleFlash" : "/items/active/weapons/ranged/muzzleflash.png"
+      "muzzleFlash" : "/items/active/weapons/ranged/muzzleflash.png",
+      
+      "middleFullbright" : "",
+      "charge": "",
+      "chargeFullbright": "",
+      "magazine": "",
+      "magazineFullbright": ""
     },
     "gunParts" : ["butt", "middle", "barrel"],
     "altAbilities" : [ ],

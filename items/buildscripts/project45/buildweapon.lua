@@ -139,9 +139,13 @@ function build(directory, config, parameters, level, seed)
     for _,part in ipairs(builderConfig.gunParts) do
       local imageSize = root.imageSize(config.animationParts[part])
       construct(config.animationCustom.animatedParts.parts, part, "properties")
-
+      
       imageOffset = vec2.add(imageOffset, {imageSize[1] / 2, 0})
-      config.animationCustom.animatedParts.parts[part].properties.offset = {config.baseOffset[1] + imageOffset[1] / 8, config.baseOffset[2]}
+      if part == "middle" then
+        config.vanillaBaseOffset =  {config.baseOffset[1] + imageOffset[1] / 8, config.baseOffset[2]}
+      else
+        config.animationCustom.animatedParts.parts[part].properties.offset = {config.baseOffset[1] + imageOffset[1] / 8, config.baseOffset[2]}
+      end
       partImagePositions[part] = copy(imageOffset)
       imageOffset = vec2.add(imageOffset, {imageSize[1] / 2, 0})
     end
