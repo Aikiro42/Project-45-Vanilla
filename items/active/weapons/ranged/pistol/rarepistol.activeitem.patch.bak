@@ -1,0 +1,62 @@
+[
+  {
+    "op": "replace",
+    "path": "/primaryAbilityType",
+    "value": "project45gunfire"
+  },
+  {
+    "op": "replace",
+    "path": "/primaryAbility",
+    "value": {}
+  },
+  {
+    "op": "replace",
+    "path": "/builder",
+    "value": "/items/buildscripts/buildproject45neoneo.lua"
+  },
+  {
+    "op": "replace",
+    "path": "/scripts",
+    "value" : ["/items/active/weapons/ranged/project45gunneo.lua"]
+  },
+  {
+    "op": "remove",
+    "path": "/animation"
+  },
+  
+  {
+    "op": "add",
+    "path": "muzzleFlashColor",
+    "value": [255, 255, 200]
+  },
+  {
+    "op": "add",
+    "path": "ejectionPortOffset",
+    "value": [0, 0]
+  },
+  {
+    "op": "add",
+    "path": "magazineOffset",
+    "value": [0, 0]
+  },
+  {
+    "op": "add",
+    "path": "railOffset",
+    "value": [0, 0]
+  },
+  {
+    "op": "add",
+    "path": "sightsOffset",
+    "value": [0, 0]
+  },
+  {
+    "op": "add",
+    "path": "underbarrelOffset",
+    "value": [0, 0]
+  },
+  {
+    "op": "add",
+    "path": "stockOffset",
+    "value": [0, 0]
+  }
+]
