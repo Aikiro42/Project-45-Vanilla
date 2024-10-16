@@ -1,0 +1,15 @@
+[
+    {
+        "op": "add",
+        "path": "/rareguns",
+        "value": [
+            "/spawnitem rarepistol",
+            "/spawnitem raremachinepistol",
+            "/spawnitem rareshotgun",
+            "/spawnitem rareassaultrifle",
+            "/spawnitem raresniperrifle",
+            "/spawnitem rarerocketlauncher",
+            "/spawnitem raregrenadelauncher"
+        ]
+    }
+]

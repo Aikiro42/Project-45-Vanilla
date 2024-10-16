@@ -1,0 +1,187 @@
+[
+  {
+    "op": "add",
+    "path": "/lore",
+    "value": "A rare mass-produced variant following the P-45 design standard."
+  },
+  {
+    "op": "replace",
+    "path": "/tooltipKind",
+    "value": "project45gun"
+  },
+  {
+    "op": "replace",
+    "path": "/baseOffset",
+    "value": [-1, -0.5]
+  },
+
+  {
+    "op": "add",
+    "path": "/gunArchetype",
+    "value": "sniper"
+  },
+
+  {
+    "op": "add",
+    "path": "/ejectionPortOffset",
+    "value": [0, 0]
+  },
+  {
+    "op": "add",
+    "path": "/magazineOffset",
+    "value": [0, 0]
+  },
+  
+  {
+    "op": "add",
+    "path": "/railOffset",
+    "value": [0, 0]
+  },
+  {
+    "op": "add",
+    "path": "/sightsOffset",
+    "value": [0, 0]
+  },
+  {
+    "op": "add",
+    "path": "/underbarrelOffset",
+    "value": [0, 0]
+  },
+  {
+    "op": "add",
+    "path": "/stockOffset",
+    "value": [0, 0]
+  },
+  
+  {
+    "op": "replace",
+    "path": "/animation",
+    "value" : "/items/active/weapons/ranged/abilities/project45gunfire/project45gunfire-vanilla.animation"
+  },
+
+  {
+    "op": "add",
+    "path": "/primaryAbilityType",
+    "value": "project45gunfire"
+  },
+  {
+    "op": "replace",
+    "path": "/primaryAbility",
+    "value": {
+      "slamFire": true,
+      "manualFeed": true,
+      "projectileKind": ["projectile", "hitscan"],
+      "cycleTime": [0.2, 0.4],
+      "inaccuracy": [0.01, 0.1],
+      "spread": [1, 3],
+      "baseDamageMultiplier" : [0.95, 1.05],
+      "reloadCost" : [17.25, 18.75],
+      "maxAmmo": [3, 10],
+      "critChance": [0.2, 0.5],
+      "critDamageMult": [2, 5],
+      "recoilAmount": [3, 5],
+      "reloadTime": 0.7,
+      "recoilMaxDeg": [10, 30],
+      "projectileCount": [3, 5],
+      "multishot": [1, 1.5],
+      "bulletsPerReload": [1, 4],
+
+      "stances":{
+        "aimStance": {
+          "frontArmFrame": "run.3",
+          "backArmFrame": "fall.1"
+        },
+        "empty": {
+          "frontArmFrame": "run.3",
+          "backArmFrame": "fall.1"
+        },
+        "boltPull": {
+          "lite": true,
+          "armRotation": 0,
+          "weaponRotation": 0,
+          "allowRotate": true,
+          "frontArmFrame": "run.3",
+          "backArmFrame": "jump.2"
+        },
+        "boltPush": {
+          "lite": true,
+          "armRotation": 0,
+          "weaponRotation": 0,
+          "allowRotate": true,
+          "frontArmFrame": "run.3",
+          "backArmFrame": "fall.1"
+        },
+        "reloading": {
+          "armRotation": -15,
+          "weaponRotation": 0,
+          "frontArmFrame": "run.2",
+          "backArmFrame": "fall.1",
+          "flipWeapon": true,
+          "allowRotate": false,
+          "weaponOffset": [0, 0.5],
+          "twoHanded": true
+        },
+        "loadRound": {
+          "armRotation": -20,
+          "weaponRotation": 0,
+          "flipWeapon": true,
+          "allowRotate": false,
+          "weaponOffset": [0, 0.5],
+          "frontArmFrame": "rotation",
+          "backArmFrame": "fall.1"
+        }
+      }  
+    }
+  },
+
+  {
+    "op": "add",
+    "path": "/project45GunModInfo",
+    "value" :{
+      "category": "universal",
+      "upgradeCapacity": [20, 50],
+      "allowsConversion": [
+        "hitscan",
+        "beam",
+        "summoned"
+      ],
+      "acceptsAmmoArchetype": [
+        "bullet",
+        "shotgun",
+        "laser",
+        "beam"
+      ],
+      "acceptsModSlot": [
+        "material",
+        "magazine",
+        "receiver",
+        "choke"
+      ]
+    }
+  },
+
+  
+  {
+    "op": "add",
+    "path": "/boltSounds",
+    "value" : [
+      {
+        "boltPull": "/sfx/project45neosfx/boltpull/boltpull-boltaction4.ogg",
+        "boltPush": "/sfx/project45neosfx/boltpush/boltpush-boltaction4.ogg"
+      }
+    ]
+  },
+
+  {
+    "op": "replace",
+    "path": "/scripts",
+    "value" : ["/items/active/weapons/ranged/project45gunneo.lua"]
+  },
+
+  {
+    "op": "replace",
+    "path": "/builder",
+    "value": "/items/buildscripts/project45/buildrandweapon.lua"
+  }
+
+]

@@ -40,6 +40,76 @@ function build(directory, config, parameters, level, seed)
     builderConfig = randomFromList(config.builderConfig, seed, "builderConfig")
   end
 
+  -- sb.logInfo(config.itemName .. ": " .. sb.printJson(config.primaryAbility, 1))
+  -- preprocess shared primary attack config
+  local rng = sb.makeRandomSource(parameters.seed)
+  local intParams = {
+    maxAmmo="ceil",
+    bulletsPerReload="floor",
+    projectileCount="ceil"
+  }
+  local matchParams = {
+    maxAmmo={"bulletsPerReload"}
+  }
+  local selectParams = set.new({
+    "projectileKind",
+    "projectileType"
+  })
+  for _, parameter in ipairs({
+    
+    "baseDamageMultiplier",
+    "reloadCost",
+    "cycleTime",
+    "critChance",
+    "critDamageMult",
+    
+    "chargeTime",
+    "overchargeTime",
+    "chargeDamageMult",
+
+    "projectileKind",
+    "projectileType",
+
+    "projectileCount",
+    "multishot",
+    
+    "inaccuracy",
+    "spread",
+    "recoilAmount",
+    "recoilMaxDeg",
+    "recoverTime",
+    "recoverDelay",
+    
+    "bulletsPerReload",    
+    "maxAmmo",
+  }) do
+    if config.primaryAbility[parameter] and type(config.primaryAbility[parameter]) == "table" then  
+      
+      if selectParams[parameter] then
+        config.primaryAbility[parameter] = randomFromList(config.primaryAbility[parameter], seed, parameter)
+      else
+        config.primaryAbility[parameter] = rng:randf(config.primaryAbility[parameter][1], config.primaryAbility[parameter][2])
+      end
+
+      if intParams[parameter] then
+        config.primaryAbility[parameter] = math[intParams[parameter]](config.primaryAbility[parameter])
+      end
+      for _, matchParam in ipairs(matchParams[parameter] or {nil}) do
+        if not config.primaryAbility[matchParam] then
+          config.primaryAbility[matchParam] = config.primaryAbility[parameter]
+        end
+      end
+    end
+  end
+
+  if config.project45GunModInfo and type(config.project45GunModInfo.upgradeCapacity) == "table" then
+    config.project45GunModInfo.upgradeCapacity = math.ceil(rng:randf(
+      config.project45GunModInfo.upgradeCapacity[1],
+      config.project45GunModInfo.upgradeCapacity[2]
+    ))
+  end
+
+
   -- select, load and merge abilities
   setupAbility(config, parameters, "alt", builderConfig, seed)
   setupAbility(config, parameters, "primary", builderConfig, seed)
@@ -70,32 +140,6 @@ function build(directory, config, parameters, level, seed)
   -- merge damage properties
   if builderConfig.damageConfig then
     util.mergeTable(config.damageConfig or {}, builderConfig.damageConfig)
-  end
-
-  -- preprocess shared primary attack config
-  local rng = sb.makeRandomSource(parameters.seed)
-  local intParams = {
-    maxAmmo="ceil"
-  }
-  local matchParams = {
-    maxAmmo={"bulletsPerReload"}
-  }
-  for _, parameter in ipairs({
-    "cycleTime",
-    "baseDamageMultiplier",
-    "reloadCost",
-    "inaccuracy",
-    "maxAmmo",
-    "critChance",
-    "critDamageMult"
-  }) do
-    config.primaryAbility[parameter] = rng:randf(config.primaryAbility[parameter][1], config.primaryAbility[parameter][2])
-    if intParams[parameter] then
-      config.primaryAbility[parameter] = math[intParams[parameter]](config.primaryAbility[parameter])
-    end
-    for _, matchParam in ipairs(matchParams[parameter] or {nil}) do
-      config.primaryAbility[matchParam] = config.primaryAbility[parameter]
-    end
   end
 
   -- build palette swap directives
@@ -159,6 +203,22 @@ function build(directory, config, parameters, level, seed)
     construct(config, "animationCustom", "sounds", "fire")
     local sound = randomFromList(config.fireSounds, seed, "fireSound")
     config.animationCustom.sounds.fire = type(sound) == "table" and sound or { sound }
+  end
+
+  if config.boltSounds then
+    construct(config, "animationCustom", "sounds", "boltPull")
+    construct(config, "animationCustom", "sounds", "boltPush")
+    local boltSound = randomFromList(config.boltSounds, seed, "boltSound")
+    config.animationCustom.sounds.boltPull = { boltSound.boltPull }
+    config.animationCustom.sounds.boltPush = { boltSound.boltPush }
+  end
+
+  if config.chargeSounds then
+    construct(config, "animationCustom", "sounds", "chargeDrone")
+    construct(config, "animationCustom", "sounds", "chargeWhine")
+    local chargeSound = randomFromList(config.chargeSounds, seed, "chargeSound")
+    config.animationCustom.sounds.chargeDrone = { chargeSound.chargeDrone }
+    config.animationCustom.sounds.chargeWhine = { chargeSound.chargeWhine }
   end
 
   -- build inventory icon
